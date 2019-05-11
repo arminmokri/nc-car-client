@@ -1,13 +1,8 @@
 package gui;
 
-import client.ClientThread;
-import client.parameters.Parameter;
-import client.parameters.Parameters;
-import client.request.Request;
 import config.Config;
 import global.GlobalVariable;
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
 
 public class JFrameMain extends javax.swing.JFrame {
 
@@ -93,7 +88,6 @@ public class JFrameMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("nc-car-control");
-        setPreferredSize(new java.awt.Dimension(880, 600));
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 

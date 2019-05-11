@@ -2,9 +2,6 @@ package gui;
 
 import client.ClientThread;
 import global.GlobalVariable;
-import java.io.File;
-import java.io.PrintWriter;
-import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -20,7 +17,7 @@ import javax.swing.JOptionPane;
 public class JPanelConnect extends javax.swing.JPanel {
 
     /**
-     * Creates new form JPanel_Connect
+     * Creates new form JPanelConnect
      */
     public JPanelConnect() {
         initComponents();
@@ -205,7 +202,7 @@ public class JPanelConnect extends javax.swing.JPanel {
 
         } catch (Exception exception) {
             exception.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error :(" + "\n" + exception);
+            JOptionPane.showMessageDialog(this, "Error :(" + "\n" + exception.getMessage());
         }
     }//GEN-LAST:event_jLabel5MouseClicked
 

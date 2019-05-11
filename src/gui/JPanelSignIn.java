@@ -1,13 +1,9 @@
 package gui;
 
-import client.ClientThread;
 import client.parameters.Parameter;
 import client.parameters.Parameters;
 import client.request.Request;
 import global.GlobalVariable;
-import java.io.File;
-import java.io.PrintWriter;
-import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -23,7 +19,7 @@ import javax.swing.JOptionPane;
 public class JPanelSignIn extends javax.swing.JPanel {
 
     /**
-     * Creates new form JPanel_Connect
+     * Creates new form JPanelSignIn
      */
     public JPanelSignIn() {
         initComponents();
@@ -198,25 +194,25 @@ public class JPanelSignIn extends javax.swing.JPanel {
         try {
 
             String username = jTextField1.getText();
-            String password = jTextField1.getText();
+            String password = jPasswordField1.getText();
 
             Parameters parameters = new Parameters();
-            parameters.addParameter(Parameter.ACTION, Parameter.REGISTER);
-            parameters.addParameter(Parameter.TYPE, Parameter.TYPE_CONTROL);
-            parameters.addParameter(Parameter.USERNAME, username);
-            parameters.addParameter(Parameter.PASSWORD, password);
+            parameters.add(Parameter.ACTION, Parameter.REGISTER);
+            parameters.add(Parameter.TYPE, Parameter.TYPE_CONTROL);
+            parameters.add(Parameter.USERNAME, username);
+            parameters.add(Parameter.PASSWORD, password);
             Request register = new Request(parameters);
             GlobalVariable.clientThread.Request(register);
-            String result = register.getResponseParameters().getParameterValue("result");
+            String result = register.getResponseParameters().getValue("result");
             if (result.equals(Parameter.RESULT_1)) {
                 GlobalVariable.jFrameMain.OnMain();
             } else {
-                throw new Exception(register.getResponseParameters().getParameterValue("message"));
+                throw new Exception(register.getResponseParameters().getValue("message"));
             }
 
         } catch (Exception exception) {
             exception.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error :(" + "\n" + exception);
+            JOptionPane.showMessageDialog(this, "Error :(" + "\n" + exception.getMessage());
         }
     }//GEN-LAST:event_jLabel5MouseClicked
 
