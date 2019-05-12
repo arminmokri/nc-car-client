@@ -5,6 +5,12 @@
  */
 package gui;
 
+import client.parameters.Parameter;
+import client.parameters.ProxyParameters;
+import client.request.Request;
+import global.GlobalVariable;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author armin
@@ -31,6 +37,12 @@ public class JPanelMain extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -42,6 +54,28 @@ public class JPanelMain extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        try {
+
+            ProxyParameters proxyParameters = new ProxyParameters();
+            proxyParameters.add(Parameter.ACTION, Parameter.HEARTBEAT);
+            Request register = new Request(proxyParameters);
+            GlobalVariable.clientThread.Request(register);
+            String result = register.getResponseParameters().getValue("result");
+            if (result.equals(Parameter.RESULT_1)) {
+                System.out.println(result);
+                GlobalVariable.jFrameMain.OnMain();
+            } else {
+                throw new Exception(register.getResponseParameters().getValue("message"));
+            }
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error :(" + "\n" + exception.getMessage());
+        }
+    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
