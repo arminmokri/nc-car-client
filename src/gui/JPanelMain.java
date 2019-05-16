@@ -5,11 +5,9 @@
  */
 package gui;
 
-import client.parameters.Parameter;
-import client.parameters.ProxyParameters;
-import client.request.Request;
-import global.GlobalVariable;
-import javax.swing.JOptionPane;
+import gui.key.KeysEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -17,15 +15,30 @@ import javax.swing.JOptionPane;
  */
 public class JPanelMain extends javax.swing.JPanel {
 
+    //
+    private KeyboardFocusManager keyboardFocusManager;
+    private KeysEventDispatcher keysEventDispatcher;
+
     /**
      * Creates new form JPanelMain
      */
     public JPanelMain() {
         initComponents();
+        keyboardFocusManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        keysEventDispatcher = new KeysEventDispatcher();
+        keysEventDispatcher.add(KeyEvent.VK_UP, key.KeyEvent.Mode.PRESS_HEARTBEAT_RELEASE);
+        keysEventDispatcher.add(KeyEvent.VK_DOWN, key.KeyEvent.Mode.PRESS_HEARTBEAT_RELEASE);
+        keysEventDispatcher.add(KeyEvent.VK_RIGHT, key.KeyEvent.Mode.PRESS_HEARTBEAT_RELEASE);
+        keysEventDispatcher.add(KeyEvent.VK_LEFT, key.KeyEvent.Mode.PRESS_HEARTBEAT_RELEASE);
+        keysEventDispatcher.add(KeyEvent.VK_C, key.KeyEvent.Mode.PRESS);
     }
 
     public void start() {
+        keyboardFocusManager.addKeyEventDispatcher(keysEventDispatcher);
+    }
 
+    public void stop() {
+        keyboardFocusManager.removeKeyEventDispatcher(keysEventDispatcher);
     }
 
     /**
@@ -36,12 +49,6 @@ public class JPanelMain extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -54,29 +61,6 @@ public class JPanelMain extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        // TODO add your handling code here:
-        try {
-
-            ProxyParameters proxyParameters = new ProxyParameters();
-            proxyParameters.add(Parameter.ACTION, Parameter.HEARTBEAT);
-            Request register = new Request(proxyParameters);
-            GlobalVariable.clientThread.Request(register);
-            String result = register.getResponseParameters().getValue("result");
-            if (result.equals(Parameter.RESULT_1)) {
-                System.out.println(result);
-                GlobalVariable.jFrameMain.OnMain();
-            } else {
-                throw new Exception(register.getResponseParameters().getValue("message"));
-            }
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error :(" + "\n" + exception.getMessage());
-        }
-    }//GEN-LAST:event_formMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

@@ -94,18 +94,6 @@ public class JFrameMain extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.CardLayout());
         jPanel1.add(jPanelConnect, "card2");
         jPanel1.add(jPanelSignIn, "card3");
-
-        javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
-        jPanelMain.setLayout(jPanelMainLayout);
-        jPanelMainLayout.setHorizontalGroup(
-            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 906, Short.MAX_VALUE)
-        );
-        jPanelMainLayout.setVerticalGroup(
-            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 521, Short.MAX_VALUE)
-        );
-
         jPanel1.add(jPanelMain, "card4");
 
         getContentPane().add(jPanel1, "card3");
