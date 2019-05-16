@@ -31,7 +31,7 @@ public class JPanelSignIn extends javax.swing.JPanel {
 
     private void update() {
         try {
-            //this.jLabel3.setIcon(new ImageIcon("nc-car-logo-450x150.png"));
+            this.jLabel3.setIcon(new ImageIcon("nc-car-logo-450x150.png"));
             jTextField1.setText(GlobalVariable.config.getCar().getUsername());
             jPasswordField1.setText(GlobalVariable.config.getCar().getPassword());
         } catch (Exception exception) {
