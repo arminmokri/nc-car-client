@@ -3,6 +3,7 @@ package gui;
 import client.parameters.Parameter;
 import client.parameters.Parameters;
 import client.request.Request;
+import client.transfer.TransferProtocol;
 import global.GlobalVariable;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -201,7 +202,7 @@ public class JPanelSignIn extends javax.swing.JPanel {
             parameters.add(Parameter.TYPE, Parameter.TYPE_CONTROL);
             parameters.add(Parameter.USERNAME, username);
             parameters.add(Parameter.PASSWORD, password);
-            Request register = new Request(parameters);
+            Request register = new Request(TransferProtocol.TCP, parameters);
             GlobalVariable.clientThread.Request(register);
             String result = register.getResponseParameters().getValue("result");
             if (result.equals(Parameter.RESULT_1)) {

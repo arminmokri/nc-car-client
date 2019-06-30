@@ -8,6 +8,7 @@ package key;
 import client.parameters.Parameter;
 import client.parameters.ProxyParameters;
 import client.request.Request;
+import client.transfer.TransferProtocol;
 import global.GlobalVariable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,7 +56,7 @@ public class Key {
                     proxyParameters.add(Parameter.KEY_CODE, code + "");
                     proxyParameters.add(Parameter.KEY_EVENT, KeyEvent.Event.HEARTBEAT.name());
                     proxyParameters.add(Parameter.KEY_MODE, mode.name());
-                    Request key_event = new Request(proxyParameters);
+                    Request key_event = new Request(TransferProtocol.TCP, proxyParameters);
                     GlobalVariable.clientThread.Request(key_event);
                     String result = key_event.getResponseParameters().getValue("result");
                     String message = key_event.getResponseParameters().getValue("message");
@@ -121,7 +122,7 @@ public class Key {
         proxyParameters.add(Parameter.KEY_MODE, mode.name());
         proxyParameters.add(Parameter.KEY_HEARTBEAT_INTERVAL, heartbeatIntetval + "");
         proxyParameters.add(Parameter.KEY_HEARTBEAT_WAIT_TIME, heartbeatWaitTime + "");
-        Request key_event = new Request(proxyParameters);
+        Request key_event = new Request(TransferProtocol.TCP, proxyParameters);
         GlobalVariable.clientThread.Request(key_event);
         String result = key_event.getResponseParameters().getValue("result");
         String message = key_event.getResponseParameters().getValue("message");
@@ -167,7 +168,7 @@ public class Key {
         proxyParameters.add(Parameter.KEY_CODE, code + "");
         proxyParameters.add(Parameter.KEY_EVENT, KeyEvent.Event.RELEASE.name());
         proxyParameters.add(Parameter.KEY_MODE, mode.name());
-        Request key_event = new Request(proxyParameters);
+        Request key_event = new Request(TransferProtocol.TCP, proxyParameters);
         GlobalVariable.clientThread.Request(key_event);
         String result = key_event.getResponseParameters().getValue("result");
         String message = key_event.getResponseParameters().getValue("message");
